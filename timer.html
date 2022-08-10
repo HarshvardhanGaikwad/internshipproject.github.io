@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ 
+    <button onclick="myFunction()" style="float:right;" type="button">start quiz timer</button>
+    <div id="count">your time will start here</div>
+<script>
+var count = 6;
+var interval;
+if (sessionStorage.getItem("timers")) {
+          if (sessionStorage.getItem("timers") <=0) {
+            sessionStorage.removeItem("timers");
+          } else {
+            var count = sessionStorage.getItem("timers");
+          }
+        } else {
+          var count = 10;
+        }
+
+
+function myFunction(){
+interval = setInterval(timers,1000);
+}
+function timers(){
+sessionStorage.setItem('timers', count);
+document.getElementById('count').innerHTML=count;
+if(count=== 0){    
+      document.getElementById('count').innerHTML='Done';
+     // or...
+      alert("You're out of time!");
+      clearInterval(interval);
+      sessionStorage.clear();
+  }
+count--;
+}
+
+</script>  
+
+</body>
+</html>
